@@ -53,7 +53,7 @@ public class TicketManagerTest {
     public void shouldRemoveById5() {
         Ticket[] expected = {ticket1, ticket2, ticket3, ticket4, ticket6};
         manager.removeById(5);
-        Assertions.assertArrayEquals(expected, manager.findAllTicket());
+        Assertions.assertArrayEquals(expected, repo.findAll());
     }
 
     @Test

@@ -39,8 +39,4 @@ public class TicketManager {
         return result;
     }
 
-    public Ticket[] findAllTicket() {
-        return repo.findAll();
-    }
-
 }
