@@ -3,6 +3,7 @@ package ru.netology.manager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.netology.TicketByPriceAscComparator;
 import ru.netology.domain.Ticket;
 import ru.netology.exception.AlreadyExistsException;
 import ru.netology.exception.NotFoundException;
@@ -13,6 +14,7 @@ public class TicketManagerTest {
 
     TicketRepository repo = new TicketRepository();
     TicketManager manager = new TicketManager(repo);
+    TicketByPriceAscComparator comparator = new TicketByPriceAscComparator();
 
     Ticket ticket1 = new Ticket(1, 2_895, "VKO", "LED", 85);
     Ticket ticket2 = new Ticket(2, 4_706, "DME", "IJK", 100);
@@ -65,22 +67,39 @@ public class TicketManagerTest {
         });
     }
 
+//    @Test
+//  public void shouldFindAllSameFromTo() {
+//        Ticket[] expected = {ticket6, ticket5};
+//        Assertions.assertArrayEquals(expected, manager.findAll("SVO", "KZN"));
+//    }
+
+//    @Test
+//    public void shouldFindOneSameFromTo() {
+//        Ticket[] expected = {ticket1};
+//        Assertions.assertArrayEquals(expected, manager.findAll("VKO", "LED"));
+//    }
+
+//    @Test
+//    public void shouldFindAllNoTickets() {
+//        Ticket[] expected = {};
+//        Assertions.assertArrayEquals(expected, manager.findAll("AER", "IJK"));//   }
+
     @Test
-    public void shouldFindAllSameFromTo() {
+    public void shouldFindAllWithComparator() {
         Ticket[] expected = {ticket6, ticket5};
-        Assertions.assertArrayEquals(expected, manager.findAll("SVO", "KZN"));
+        Assertions.assertArrayEquals(expected, manager.findAll("SVO", "KZN", comparator));
     }
 
     @Test
     public void shouldFindOneSameFromTo() {
         Ticket[] expected = {ticket1};
-        Assertions.assertArrayEquals(expected, manager.findAll("VKO", "LED"));
+        Assertions.assertArrayEquals(expected, manager.findAll("VKO", "LED", comparator));
     }
 
     @Test
     public void shouldFindAllNoTickets() {
         Ticket[] expected = {};
-        Assertions.assertArrayEquals(expected, manager.findAll("AER", "IJK"));
+        Assertions.assertArrayEquals(expected, manager.findAll("AER", "IJK", comparator));
     }
 
 }
